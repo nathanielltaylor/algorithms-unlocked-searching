@@ -29,7 +29,7 @@ def sentinel_search(array, elements_to_search, target)
 end
 
 def recursive_search(array, elements_to_search, target, i)
-  if i > elements_to_search
+  if i > (elements_to_search - 1)
     return nil
   else
     if array[i] == target
@@ -37,5 +37,31 @@ def recursive_search(array, elements_to_search, target, i)
     else
       recursive_search(array, elements_to_search, target, (i + 1))
     end
+  end
+end
+
+def binary_search(array, elements_to_search, target)
+  low = 0
+  high = (elements_to_search - 1)
+  while low <= high
+    middle = ((low + high) / 2)
+    return middle if array[middle] == target
+    if array[middle] > target
+      high = middle - 1
+    else
+      low = middle + 1
+    end
+  end
+  return nil
+end
+
+def recursive_binary(array, low, high, target)
+  return nil if low > high
+  middle = ((low + high) / 2)
+  return middle if array[middle] == target
+  if array[middle] > target
+    recursive_binary(array, low, middle - 1, target)
+  else
+    recursive_binary(array, middle + 1, high, target)
   end
 end
